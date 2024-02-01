@@ -1,6 +1,6 @@
 # POWERED BY 
 
-http://github.com/jeromeetienne/AR.js)
+http://github.com/jeromeetienne/AR.js
 
 
 https://github.com/mrdoob/three.js
