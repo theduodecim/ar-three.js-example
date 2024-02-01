@@ -10,19 +10,33 @@
 		  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.1.7/aframe/build/aframe-ar.js"></script>
 	</head>
 	<body>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "./assets/three.module.js",
+					"three/addons/": "./jsm/"
+				}
+			}
+		</script>
+
 		<script type="module">
 			import * as THREE from 'three';
 			import { OrbitControls } from './assets/OrbitControls.js';
 			import { FBXLoader } from './assets/FBXLoader.js';
+
 			let camera, scene, renderer, stats;
+			let modelPath = './assets/models/Samba Dancing.fbx';
 			const clock = new THREE.Clock();
+
 			let mixer;
+
 			init();
 			animate();
 
 function init() {
 	const container = document.createElement( 'div' );
-		document.body.appendChild( container );
+				document.body.appendChild( container );
 	//////////////////////////////////////////////////////////////////////////////////
 	//Init
 	//////////////////////////////////////////////////////////////////////////////////
@@ -72,6 +86,7 @@ function init() {
 				dirLight.shadow.camera.left = - 120;
 				dirLight.shadow.camera.right = 120;
 				scene.add( dirLight );
+
 			// scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
 			// ground
 			//const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
@@ -110,7 +125,7 @@ function init() {
 	//////////////////////////////////////////////////////////////////////////////////
 		// model
 		const loader = new FBXLoader();
-				loader.load( './assets/models/Samba Dancing.fbx', function ( object ) {
+				loader.load( modelPath, function ( object ) {
 					mixer = new THREE.AnimationMixer( object );
 					const action = mixer.clipAction( object.animations[ 0 ] );
 					action.play();
